@@ -16,6 +16,7 @@ class _SecondExampleState extends State<SecondExample> {
   List<UserModel> userlist=[];
   Future<List<UserModel>> getUserModelApi() async{
     final response= await http.get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
+    print(response);
     var data = jsonDecode(response.body.toString());
 
     if(response.statusCode==200)
@@ -48,7 +49,7 @@ class _SecondExampleState extends State<SecondExample> {
         children: [
           Expanded(child: FutureBuilder(
             future: getUserModelApi(),
-            builder:(context, AsyncSnapshot<List<UserModel>>snapshot){
+            builder:(context, AsyncSnapshot<List<UserModel>>snapshot){//AsyncSnapshot<List<UserModel>>what is the use of this line
               if(snapshot.connectionState == ConnectionState.waiting)
                 {
                   return const CircularProgressIndicator();
